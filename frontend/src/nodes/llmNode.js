@@ -1,34 +1,16 @@
-// llmNode.js
-
-import { Handle, Position } from 'reactflow';
+import { useState } from 'react';
+import { Bot } from 'lucide-react';
+import { BaseNode, NodeSelect } from './baseNode';
 
 export const LLMNode = ({ id, data }) => {
-
+  const [model, setModel] = useState(data?.model || 'gpt-4o');
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-system`}
-        style={{top: `${100/3}%`}}
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-prompt`}
-        style={{top: `${200/3}%`}}
-      />
-      <div>
-        <span>LLM</span>
-      </div>
-      <div>
-        <span>This is a LLM.</span>
-      </div>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-response`}
-      />
-    </div>
+    <BaseNode id={id} title="LLM" icon={Bot}
+      inputs={[{ id: 'system' }, { id: 'prompt' }]}
+      outputs={[{ id: 'response' }]}
+    >
+      <NodeSelect label="Model" value={model} onChange={e => setModel(e.target.value)}
+        options={['gpt-4o', 'gpt-4-turbo', 'claude-3-5-sonnet']} />
+    </BaseNode>
   );
-}
+};
