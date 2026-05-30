@@ -170,3 +170,5 @@ textarea.style.height = `${textarea.scrollHeight}px`;
   "is_dag": true
 }
 ```
+
+Developed by DK
